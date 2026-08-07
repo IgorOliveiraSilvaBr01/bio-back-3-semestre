@@ -19,7 +19,6 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<?> criarUsuario(@RequestBody UsuarioRequest req){
-        usuarioService.criarUsuario(req);
         return ResponseEntity.ok("Criado com sucesso"
                 + usuarioService.criarUsuario(req));
     }

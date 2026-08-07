@@ -35,4 +35,6 @@ public class UsuarioService {
                         usuario.getId(), usuario.getEmail(),
                         usuario.getNome(), usuario.getDtCriacao())).toList();
     }
+
+
 }
