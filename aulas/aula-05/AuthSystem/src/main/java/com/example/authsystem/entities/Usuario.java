@@ -1,9 +1,7 @@
 package com.example.authsystem.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.ISBN;
 
 import java.time.LocalDate;
@@ -15,8 +13,13 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Email @Column(unique = true, comment = "Email incorreto")
+    // faz com que o email seja unico
+    // traz validações para confirmar se o valor recebido se comporta como um email
     private String email;
+    @Size(min = 6, max = 20, message = "Teste da Fiama")
     private String senha;
+    @NotNull
     private String nome;
     private LocalDateTime dtCriacao;
 

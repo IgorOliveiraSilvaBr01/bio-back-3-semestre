@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService {
@@ -36,5 +37,20 @@ public class UsuarioService {
                         usuario.getNome(), usuario.getDtCriacao())).toList();
     }
 
+    public UsuarioResponse buscarId(long id) {
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
+        UsuarioResponse usuarioResponse = new UsuarioResponse(usuario);
+        return usuarioResponse  ;
+    }
 
+    public String deletarUsuario(long id) {
+        Optional <Usuario> usuario = usuarioRepository.findById(id);
+
+        if (usuario == null){
+            return "Usuario não existe";
+        } else {
+            usuarioRepository.deleteById(id);
+            return "Usuário kickado";
+        }
+    }
 }

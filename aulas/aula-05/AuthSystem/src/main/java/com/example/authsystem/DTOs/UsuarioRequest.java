@@ -1,11 +1,16 @@
 package com.example.authsystem.DTOs;
 
+import jakarta.validation.constraints.*;
+
 import java.time.LocalDateTime;
 
 public class UsuarioRequest {
 
+    @Email
     private String email;
+    @Size(min = 6, max = 20, message = "Teste da Fiama")
     private String senha;
+    @NotNull
     private String nome;
     private LocalDateTime dtCriacao;
 

@@ -1,6 +1,9 @@
 package com.example.authsystem.DTOs;
 
+import com.example.authsystem.entities.Usuario;
+
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class UsuarioResponse {
 
@@ -18,6 +21,13 @@ public class UsuarioResponse {
         this.email = email;
         this.nome = nome;
         this.dtCriacao = dtCriacao;
+    }
+
+    public UsuarioResponse(Optional<Usuario> usuario) {
+        id = usuario.get().getId();
+        email = usuario.get().getEmail();
+        nome = usuario.get().getNome();
+        dtCriacao = usuario.get().getDtCriacao();
     }
 
     public Long getId() {

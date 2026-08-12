@@ -18,6 +18,7 @@ public class LoginController {
         this.loginService = loginService;
     }
 
+    // fazer login no usuario
     @PostMapping
     public ResponseEntity<?> logar(@RequestBody LoginDTO dto){
         return ResponseEntity.ok(loginService.login(dto));
