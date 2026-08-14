@@ -19,7 +19,7 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public UsuarioRequest criarUsuario(UsuarioRequest request){
+    public UsuarioRequest criarUsuario(UsuarioRequest request) {
         Usuario usuario = new Usuario();
         usuario.setNome(request.getNome());
         usuario.setEmail(request.getEmail());
@@ -30,7 +30,7 @@ public class UsuarioService {
         return request;
     }
 
-    public List<UsuarioResponse> mostrarUsuario(){
+    public List<UsuarioResponse> mostrarUsuario() {
         return usuarioRepository.findAll().stream()
                 .map(usuario -> new UsuarioResponse(
                         usuario.getId(), usuario.getEmail(),
@@ -40,17 +40,28 @@ public class UsuarioService {
     public UsuarioResponse buscarId(long id) {
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         UsuarioResponse usuarioResponse = new UsuarioResponse(usuario);
-        return usuarioResponse  ;
+        return usuarioResponse;
     }
 
     public String deletarUsuario(long id) {
-        Optional <Usuario> usuario = usuarioRepository.findById(id);
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
 
-        if (usuario == null){
+        if (usuario == null) {
             return "Usuario não existe";
         } else {
             usuarioRepository.deleteById(id);
             return "Usuário kickado";
         }
     }
+
+    public String alterarUsuario(Long id, UsuarioRequest usuarioAlterado) {
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow();
+
+        usuario.setNome(usuarioAlterado.getNome());
+        usuario.setEmail(usuarioAlterado.getEmail());
+        usuario.setSenha(usuarioAlterado.getSenha());
+
+        usuarioRepository.save(usuario);
+        return "ok";
+    };
 }

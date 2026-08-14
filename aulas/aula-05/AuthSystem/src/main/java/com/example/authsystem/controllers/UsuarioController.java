@@ -37,8 +37,15 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.buscarId(id));
     }
 
+    // deletar usuario
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletarId(@PathVariable("id") long id){
         return ResponseEntity.ok(usuarioService.deletarUsuario(id));
+    }
+
+    // alterar usuario
+    @PutMapping("/{id}")
+    public ResponseEntity<?> alterarUsuario(@Valid @PathVariable("id") long id, @RequestBody UsuarioRequest usuarioRequest){
+        return ResponseEntity.ok(usuarioService.alterarUsuario(id, usuarioRequest));
     }
 }
