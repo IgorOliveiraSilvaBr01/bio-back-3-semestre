@@ -45,10 +45,20 @@ public class ContatoService {
         )).toList(); // converte todos os novos objetos e os converte para uma lista
     }
 
+    // logica do metodo que permite listar um contato pelo id - get
+    public ContatoResponse buscarId(Long id){
+        // exige o id do objeto que sera visualizado individualmente
+        Optional<Contato> contato = contatoRepository.findById(id);
+        // procura no banco de dados um objeto que tenha o id indicado
+        ContatoResponse contatoResponse = new ContatoResponse(contato);
+        // cria um novo objeto que traz os dados que serão exibidos do objeto do id indicado
+        return contatoResponse;
+    }
+
     // logica do metodo que permite alterar o contato da agenda através do seu id - put
     public String alterarContato(Long id, ContatoRequest contatoAlterado){
         // exige o id do objeto que sera alterado e um objeto ContatoRequest que ira receber os novos valores
-        Contato contato = contatoRepository.findById(id).orElseThrow(); // orElseThrow() - exibe um erro caso o id não haja nenhum objeto com o id indicado
+        Contato contato = contatoRepository.findById(id).orElseThrow(); // orElseThrow() - exibe um erro caso não haja nenhum objeto com o id indicado
         // busca no banco de dados um objeto pelo id indicado na url
 
         contato.setNome(contatoAlterado.getNome());
